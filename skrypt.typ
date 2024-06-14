@@ -2,60 +2,61 @@
   font: "New Computer Modern",
   size: 11pt
 )
-#set page(paper: "a4", margin: (x: 0.5cm, y: 1cm), numbering: "1 / 1",
-footer: context [
-  #set text(8pt)
-  #h(1fr)
-  #counter(page).display(
-    "1 / 1",
-    both: true
-  )
-])
+#set page(
+  paper: "a4",
+  margin: (x: 0.5cm, y: 1cm),
+  numbering: "1 / 1",
+  footer: context [
+    #set text(8pt)
+    #h(1fr)
+    #counter(page).display(
+      "1 / 1",
+      both: true
+    )
+  ]
+)
 #set heading(numbering: "1.")
-//#show heading: it => block(width: 100%, above: 12pt, below: 10pt)[
-//  #set align(left)
-//  #set text(12pt, weight: "semibold")
-//  #it
-//]
-#show par: set block(spacing: 0.5em)
+#let index() = {
+  context [
+    #set text(size: 11pt)
+    #let to-string(content) = {
+      if content.has("text") {
+        content.text
+      } else if content.has("children") {
+        content.children.map(to-string).join("")
+      } else if content.has("body") {
+        to-string(content.body)
+      } else if content == [ ] {
+        " "
+      }
+    }
+
+    #text(size: 16pt, weight: "bold")[Indeks pojęć]
+    #v(2pt)
+    #set block(above: 6pt, below: 0pt)
+
+    #counter(heading).update(0)
+    #for e in query(selector(heading)).sorted(key: x => to-string(x)).filter(x => x.level == 2) [
+      #link(e.location())[
+        #grid(
+          columns: (auto, 5pt, auto, 5pt, auto),
+          e.body,
+          [],
+          repeat("."),
+          [],
+          str(e.location().page())
+        )
+      ]
+    ]
+  ]
+}
 
 #align(center)[
   #text(size: 15pt, weight: "bold")[Metody Probabilistyczne]
 ]
 
 #outline(title: "Spis treści", indent: {auto}, depth: 2)
-#pagebreak()
-
-#context [
-  #set text(size: 11pt)
-  #let to-string(content) = {
-    if content.has("text") {
-      content.text
-    } else if content.has("children") {
-      content.children.map(to-string).join("")
-    } else if content.has("body") {
-      to-string(content.body)
-    } else if content == [ ] {
-      " "
-    }
-  }
-
-  #text(size: 16pt, weight: "bold")[Indeks pojęć]
-  #set block(above: 6pt, below: 0pt)
-
-  #counter(heading).update(0)
-  #for e in query(selector(heading)).sorted(key: x => to-string(x)).filter(x => x.level == 2) [
-    #link(e.location())[
-      #grid(
-        columns: (auto, auto, auto),
-        e,
-        repeat("."),
-        str(e.location().page())
-      )
-    ]
-  ]
-]
-
+#index()
 #pagebreak()
 
 = Pytania o wszystkim i o niczym
