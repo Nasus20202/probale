@@ -13,6 +13,13 @@
       "1 / 1",
       both: true
     )
+  ],
+  header: context [
+    #set text(8pt)
+    #counter(page).display(
+      "1 / 1",
+      both: true
+    )
   ]
 )
 #set heading(numbering: "1.1.1")
@@ -42,7 +49,7 @@
       }
     }
     #h(1fr)
-    #text(size: 16pt, weight: "bold")[Indeks pojęć]
+    #text(size: 16pt, weight: "regular")[Indeks pojęć]
     #v(2pt)
     #set block(above: 6pt, below: 0pt)
 
