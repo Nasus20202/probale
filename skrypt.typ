@@ -1,4 +1,4 @@
-#let premium = true
+#let premium = false
 #set text(
   font: "New Computer Modern",
   size: 11pt
@@ -24,7 +24,7 @@
   ],
   background: context [
     #if not premium {
-      image("./img/watermark.png", width: 60%, height: 60%)
+      image("./img/watermark_5.png", height: 50%)
     }
   ]
 )
@@ -225,6 +225,9 @@ $ P(Z_0 >= x) = 1 - (1-e^(-x))^100 $
 === Jakie byłoby prawdopodobieństwo $P(X = k)$ gdyby $A$ były niezależne?
 Takie samo, bo moglibyśmy je policzyć również z twierdzenia o kombinacji zdarzeń.
 
+=== Jak wyglądałby rozkład $P(X=k), k = 0,1,...,n$ gdyby zdarzenia $A_i$ były rozłączne?
+Gdy są nierozłączne może być kilka szczelin prostych naraz. Tylko jedno puste może zajść $k = 0$ lub $k = 1$.
+
 === Co jest większe: $abs(X = k)$ czy $binom(n, k) (n - k)^m$?
 $binom(n, k) (n - k)^m$, bo doliczamy jeszcze, gdy $k + 1$, $k + 2$, ..., $n$ szczelin pustych. Jest to uogólnienie wzoru Bernoulliego.
 
@@ -307,6 +310,9 @@ Od pewnego momentu w wierszach i kolumnach tablicy są same wartości STOP.
 === Dlaczego nie jest poprawna polityka terminacji "znajdź pozycję w ciągu prób, dla której $a$ jest maksymalne i podejmij wówczas decyzję STOP"?
 Bo tę decyzję musimy podjąć na bieżąco, a nie po poznaniu całego ciągu. Jeżeli moglibyśmy podjąć ją po poznaniu całego ciągu, to zawsze bylibyśmy w stanie podjąć decyzję optymalną.
 
+=== Wyjaśnij probabilistyczny sens równania $e(o, r) = 1/2 e(o + 1, r) = 1/2 e(o, r + 1)$.
+Równanie to można interpretować probabilistycznie jako przewidywanie prawdopodobieństwa wystąpienia zdarzenia e w punkcie $(o,r)$ na podstawie prawdopodobieństw wystąpienia tego samego zdarzenia w sąsiednich punktach: $(o+1, r)$ i $(o, r+1)$.
+
 == Testowanie oprogramowania
 
 === Co reprezentują wielkości losowe $B$ i $G$?
@@ -345,6 +351,18 @@ $w, n$ - to co już zaszło i o tym wiemy \
 
 === Dla ograniczenia efektów nieuczciwych raportów ocenę $z^*$ porównuje się z jaką charakterystyką rozkładu $p(z|w, n)$?
 Ocenę większościową $z^*(M)$ porównujemy z kwantylami rozkładu otrzymanego dla $w$ i $m$ tylko danego klienta. Jeśli ocena jest mniejsza lub większa od progowego kwantyla to klienta uznajemy za nieuczciwego.
+
+=== Rozkład beta jest pewnym warunkowym rozkładem gęstości prawdopodobieństwa - jakiej wielkości losowej i przy jakim warunku?
+
+Rozkład beta jest określony dla dwóch parametrów, $alpha$ i $beta$, które są parametrami kształtu. Wartości tych parametrów wpływają na kształt rozkładu gęstości prawdopodobieństwa. Zmienna losowa $X$ z rozkładem beta ma gęstość prawdopodobieństwa określoną wzorem:
+
+$ f(x|alpha, beta) = (x^(alpha - 1) (1-x)^(beta - 1))/B(alpha, beta) \
+x "jest wartością zmiennej losowej," \
+alpha > 0 "jest parametrem kształtu," \
+beta > 0 "jest drugim parametrem kształtu," \
+B(alpha, beta) "jest funkcją beta, która normalizuje rozkład (całka gęstości prawdopodobieństwa od 0 do 1 równa 1)."
+$
+
 
 == Metoda odwracania dystrybuanty
 
@@ -440,6 +458,16 @@ Atom w jednym punkcie, a reszta jest rozłożona jak krzywa wykładnicza.
 
 === W przykładzie dla $P(N = 0) = 0.3$, $P(N = 1) = 0.2$, $P(N = 2) = 0.2$, $P(N = 3) = 0.1$ prawdopodobieństwo, że populacja w drugim pokoleniu wymrze wynosi...
 $ P(Y^(2) = 0) = 0.4407 $
+
+=== Jakie jest prawdopodobieństwo ostatecznego wymarcia populacji przy $P(N = 0) = 0.3, P(N = 1) = 0.4, P(N = 2) = 0.2, P(N = 3) = 0.05$.
+Korzystamy z metody Newtona (iteracyjnym przybliżaniu pierwiastka równania) \
+$q = 0.3 + 0.4q +0.2q^2 + 0.05q^3$ (przyrównujemy to do 0, czyli przenosimy q na drugą) \
+$f(q) = 0.05q^3 + 0.2q^2 - 0.6q + 0.3$ (obliczamy z tego pochodną) \
+$f'(q) = 0.15q^2 + 0.4q - 0.6$ \
+$q_(n+1) = q_n - f(q_n)/(f'(q_n))$ \
+Jako $q_0$ wybieramy 0 i podstawiając do $f(q)$ i $f'(q)$ obliczamy wartości. Podstawiamy je do wzoru na kolejne $q$ i mamy $q_1$. Następnie obliczamy $q_2$ za pomocą $q_1$ itd. \
+$q_0 = 0 -> q_1 = 0.5 -> q_2 = 0.65517 -> q_3 = 0.67964$ \
+$product = 0.68078$
 
 === Prawdopodobieństwa liczby bezpośrednich potomków są następujące: 0 - 30%, 1 - 40%, 2 - 20% i 3 - 10%. Jaka jest szansa, że populacja nie wymrze?
 Szansa że wymrze, to 0.791, czyli że przeżyje to 1-0.791 = 0.209
@@ -566,6 +594,15 @@ $abs(S)^2$ dla trigramów w I rzędzie (pamiętamy 2 ostatnie)
 === Co przesądza o szybkości zbieżności do rozkładu granicznego?
 Druga wartość własna $lambda_1$ macierzy $M$. Im mniejsza, tym szybsza zbieżność.
 
+=== Jaki jest rozkład graniczny jednorodnego dwustanowego łańcucha Markowa o macierzy przejść $M = mat(1/2, 1/2; 1/4, 3/4)$
+$(pi_1, pi_2) mat(1/2, 1/2; 1/4, 3/4) = (pi_1, pi_2) #h(2cm)
+cases(
+  1/2 pi_1 + 1/4 pi_2 = pi_1,
+  1/2 pi_1 + 1/4 pi_2 = pi_2
+) #h(2cm)
+pi_1 = 3/4, pi_2 = 1/4 => pi = (3/4, 1/4)
+$
+
 == PageRank
 
 === Jak z punktu widzenia markowskiego modelu probabilistycznego należy interpretować współczynnik tłumienia w podstawowej formule PageRank?
@@ -604,6 +641,10 @@ Jeżeli składowe wektora są niezależne, to są nieskorelowane (cov = 0). Jeż
 
 === Jaki wpływ ma unormowany współczynnik kowariancji na prostą regresji i błąd średniokwadratowy regresji?
 Od tego współczynnika zależy współczynnik kierunkowy prostej. Przykładowo, ujemnie skorelowane skutkują w prostej malejącej. Ponadto, im bardziej skorelowane zmienne, tym mniejszy błąd średniokwadratowy. Błąd ten wynosi 0 dla korelacji liniowej. Natomiast jest maksymalny, gdy współczynnik korelacji wynosi 1. Czym bardziej skorelowane tym lepiej (nie ważne czy dodatnio czy ujemnie).
+
+=== Jak wygląda prosta regresji w przypadku, gdy $X i Y$ są nieskorelowane?
+W przypadku, gdy zmienne $X$ i $Y$ są nieskorelowane, współczynnik kierunkowy $beta_1$ w prostym modelu regresji liniowej będzie bliski lub równy zeru, co oznacza, Że nie ma liniowego związku między $X$ i $Y$. W takiej sytuacji, najlepszym estymatorem dla $Y$ byłaby po prostu średnia $Y$, ponieważ $X$ nie dostarcza żadnej dodatkowej informacji, która mogłaby pomóc w przewidywaniu $Y$. \
+Zatem równanie prostej regresji przy braku korelacji między $X$ i $Y$ sprowadza się do: $ Y = beta_0 + epsilon$, gdzie $beta_0$ będzie równy średniej $Y$.
 
 == Stratna kompresja obrazu
 
@@ -662,6 +703,16 @@ Nie, ponieważ nie wyznaczamy prawdopodobieństwa tego, że $a$ należy do jakie
 
 === Gdyby przy $n = 1000$ i $z = 20%$ jako poziom ufności przyjąć $delta = 90%$, to czy spodziewany rezultatem jest $J delta (z) = [0.16, 0.24]$? Uzasadnij.
 Nie, prawdziwy wynosi $[0,1801,0,2216]$. Ponieważ wraz ze spadkiem poziomu ufności, "ufamy" mniejszej ilości rozwiązań, więc przedział się zwęża a nie rozszerza.
+#align(center)[
+  #table(
+    columns: 4,
+    [n], [z], [$delta$], [$J_delta (z)$],
+    [1000],  [0.2],  [0.95], [[0.1764, 0.2260]],
+    [1000],  [0.2],  [0.90], [[0.1801, 0.2216]],
+    [10000], [0.2],  [0.95], [[0.1923, 0.2080]],
+    [1000],  [0.25], [0.95], [[0.2242, 0.2778]]
+  )
+]
 
 === Gdyby przy $n = 1000$ i $z = 20%$ jako poziom ufności przyjąć $delta = 99%$, to czy mogłaby być prawdziwa równość $P(a in [0.1619, 0.232]) = 0.99$?
 Nie, jeżeli np. $a = 0.17$ to $P = 1$, jeżeli $a = "np." 0.1$ to $P = 0$, a nie $50/50$. Patrz wyżej.
@@ -683,6 +734,9 @@ Bo i male i duże ilości serii przemawiają przeciwko temu, że próba jest pro
 
 === Gdy wyznaczona wartość $p$-value jest wyższa niż przyjęty poziom istotności, to czy powinniśmy odrzucić hipotezę zerową?
 Gdy jest wyższa to bezpieczniej czujemy się nie odrzucając.
+
+=== Gdy wyznaczona wartość $p$-value jest niższa niż przyjęty poziom istotności, powinniśmy odrzucić hipotezę zerową?
+Tak, powinniśmy odrzucić hipotezę zerową, ponieważ dla mniejszych poziomów istotności byśmy to odrzucili. Odrzucając to czujemy się tym bezpieczniej, im mniejsza jest $p$-value.
 
 === Gdy wyznaczona wartość $p$-value jest wyraźnie niższa niż przyjęty poziom istotności, czujemy się bardziej, czy mniej komfortowo odrzucając hipotezę zerową?
 Gdy jest niższa to odrzucając czujemy się bezpieczniej.
