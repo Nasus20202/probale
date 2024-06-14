@@ -511,7 +511,7 @@ Zaobserwujemy kolejne rozkłady Erlanga-n, które będą coraz bardziej przypomi
 
 === Aby obliczyć $P(99000 <= S_40000 <= 101000)$ potrzebna nam jest wartość funkcji Laplace'a dla...
 $ Phi((101000 - 40000 * 2.5)/(sqrt(40000) * 1.369)) - Phi((99000 - 40000 * 2.5)/(sqrt(40000)*1.369)) = 2 Phi(3.652) $
-$ sigma = sqrt(10*0.25*sqrt(1-0.25)) \ 
+$ sigma = sqrt(10*0.25*(1-0.25)) \ 
 P(a <= S_n < b) = Phi((b - n * m)/(sqrt(n) * sigma)) - Phi((a - n * m)/(sqrt(n)*sigma)) $
 
 == Eksperyment Wolfa
