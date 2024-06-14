@@ -36,7 +36,7 @@
     #set block(above: 6pt, below: 0pt)
 
     #counter(heading).update(0)
-    #for e in query(selector(heading)).sorted(key: x => to-string(x)).filter(x => x.level == 2) [
+    #for e in query(selector(heading)).sorted(key: x => upper(to-string(x))).filter(x => x.level == 2) [
       #link(e.location())[
         #grid(
           columns: (auto, 5pt, auto, 5pt, auto),
