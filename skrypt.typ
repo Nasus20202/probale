@@ -1,3 +1,4 @@
+#let premium = true
 #set text(
   font: "New Computer Modern",
   size: 11pt
@@ -20,6 +21,11 @@
       "1 / 1",
       both: true
     )
+  ],
+  background: context [
+    #if not premium {
+      image("./img/watermark.png", width: 60%, height: 60%)
+    }
   ]
 )
 #set heading(numbering: "1.1.1")
@@ -33,6 +39,43 @@
     [#it]
   }
 ]
+
+#let toc() = {
+  context [
+    #set text(size: 11pt)
+    #let to-string(content) = {
+      if content.has("text") {
+        content.text
+      } else if content.has("children") {
+        content.children.map(to-string).join("")
+      } else if content.has("body") {
+        to-string(content.body)
+      } else if content == [ ] {
+        " "
+      }
+    }
+    #text(size: 16pt, weight: "bold")[#align(center)[Spis treści]]
+    #v(2pt)
+    #set block(above: 6pt, below: 0pt)
+
+    #counter(heading).update(0)
+    #columns(
+      2,
+      gutter: 5pt,
+      for e in query(selector(heading)).filter(x => x.level != 3) [
+        #link(e.location())[
+          #stack(
+            dir: ltr,
+            h(e.depth * 10pt),
+            e,
+            h(5pt),
+            "(" + str(e.location().page()) + ")"
+          )
+        ]
+      ]
+    )
+  ]
+}
 
 #let index() = {
   context [
@@ -48,32 +91,33 @@
         " "
       }
     }
-    #h(1fr)
-    #text(size: 16pt, weight: "regular")[Indeks pojęć]
+    #text(size: 16pt, weight: "bold")[#align(center)[Indeks pojęć]]
     #v(2pt)
     #set block(above: 6pt, below: 0pt)
 
     #counter(heading).update(0)
-    #for e in query(selector(heading)).sorted(key: x => upper(to-string(x))).filter(x => x.level == 2) [
-      #link(e.location())[
-        #grid(
-          columns: (auto, 5pt, auto, 5pt, auto),
-          e.body,
-          [],
-          repeat("."),
-          [],
-          str(e.location().page())
-        )
+    #columns(
+      2,
+      gutter: 5pt,
+      for e in query(selector(heading)).sorted(key: x => upper(to-string(x))).filter(x => x.level == 2) [
+        #link(e.location())[
+          #stack(
+            dir: ltr,
+            e.body,
+            h(5pt),
+            "(" + str(e.location().page()) + ")"
+          )
+        ]
       ]
-    ]
+    )
   ]
 }
 
 #align(center)[
-  #text(size: 15pt, weight: "bold")[Metody Probabilistyczne]
+  #text(size: 18pt, weight: "bold")[Kajecik Fazbera na Metody Probabilistyczne]
 ]
 
-#outline(title: "Spis treści", indent: {auto}, depth: 2)
+#toc()
 #index()
 #pagebreak()
 
@@ -128,14 +172,12 @@ Ponieważ przewidywany zwrot jest równy zero. Inaczej - średnio strzelając uz
 = Rozkłady prawdopodobieństwa
 
 == iTrust
-
 === Gdy liczby agentów objętych dystrybucją zapytań ($z$) i metadanych ($m$) są równe $4sqrt(n)$ prawdopodobieństwo braku trafień oszacujemy jako...
 $ P(T=0) < e^(-(m z)/n) = e^((-4sqrt(n)*4sqrt(n))/n) = e^(-16) $
-
 == Symulator w hiperkuli
 
 === Wydajność generatora dopuszczalnych układów odchyłek dla symulatora systemu zależy w następujący sposób od dopuszczalnego promienia hiperkuli.
-Nie zależy (na wzorze można pokazać).
+Nie zależy (na wzorze można pokazać). Zależy jedynie od ilości wymiarów, w których jest określona.
 
 === W jaki sposób zastosowana została geometryczna definicja prawdopodobieństwa?
 Prawdopodobieństwo jest równe stosunkowi miary obszaru hiperkuli do miary obszaru hiperkostki.
@@ -147,6 +189,18 @@ Bo dla trzech jedynek mamy do czynienia z fatalnym błędem decyzyjnym. Moc kore
 
 === Ciągiem nadanym jest 10000, ciągiem błędów jest 01001. Jaką decyzję podejmie dekoder?
 Odbierzemy 11001, czyli koder podejmie decyzję 01001, czyli będzie to błąd fatalny.
+
+$
+10000 -> "ciąg nadany S", 01001 -> "ciąg błędów Z"\
+ 11001 -> "ciąg odebrany" Y = S plus.circle Z, "wybieramy" S_d ", gdzie najmniej jedynek w" S_d plus.circle Y
+$
+#align(center)[
+  #table(
+    columns: 5,
+    [$S_d$], [10111], [10000], [01110], [01001],
+    [$S_d plus.circle Y$], [01110 (3)], [01101 (2)], [10111 (4)], [10000 (1)]
+  )
+]
 
 === Wyjaśnij rolę zasady maksimum wiarygodności w konstrukcji kodu.
 Na podstawie zasady maksimum wiarygodności wyprowadzamy metrykę Hamminga i wybieramy najbardziej wiarygodny ciąg bitów.
@@ -172,7 +226,7 @@ $ P(Z_0 >= x) = 1 - (1-e^(-x))^100 $
 Takie samo, bo moglibyśmy je policzyć również z twierdzenia o kombinacji zdarzeń.
 
 === Co jest większe: $abs(X = k)$ czy $binom(n, k) (n - k)^m$?
-$binom(n, k) (n - k)^m$, bo doliczamy jeszcze, gdy $k + 1$, $k + 2$, ..., $n$ szczelin pustych.
+$binom(n, k) (n - k)^m$, bo doliczamy jeszcze, gdy $k + 1$, $k + 2$, ..., $n$ szczelin pustych. Jest to uogólnienie wzoru Bernoulliego.
 
 === Uzasadnij, że zdarzenia $A_1$, ..., $A_n$, gdzie $A_i$ - szczelina $i$ jest pusta, nie są rozłączne i nie są niezależne.
 Nie są rozłączne, ponieważ może być kilka pustych szczelin naraz. Nie są niezależne, bo pustość jednej szczeliny zmniejsza prawdopodobieństwo pustości innej.
@@ -187,6 +241,9 @@ Fakt, że "zapalanie" kolejnych bitów nie jest niezależne statystycznie. Możn
 === Wyjaśnij naiwność klasyfikatora
 #image("img/2_7_1.png")
 Niezależność zdarzeń nie implikuje niezależności tych zdarzeń pod wystąpieniem jakiegoś warunku jak ilustruje rysunek.
+
+=== Podaj przykład relacji między zdarzeniami B i C zapewniającej warunkową niezależność statystyczną zdarzeń A i B na przykładowym wykresie Venna.
+Powyższy rysunek: Wystąpienie/niewystąpienie $Z$ może wprowadzać statystyczną zależność pomiędzy sygnałami detektorów. Niemniej warunkowa niezależność sygnałów często jest zakładana.
 
 === Dlaczego bezpośrednie zastosowanie zasady maksimum wiarygodności nazwaliśmy naiwnym?
 Niezależne zdarzenia $A$ i $B$ nie muszą pozostać takimi przy warunku $C$ - niezależność statystyczna na ogół nie implikuje warunkowej niezależności.
@@ -223,8 +280,11 @@ Jest to liczba wylosowana przez lidera, czyli ciąg orłów i reszek zamieniony 
 2. Spotkanie lub brak spotkania w ciągu $d t$.
 3. Reputacje uczestnika i partnera, korzystając z $W(t)$ do obliczenia prawdopodobieństw hipotez.
 
-=== Obliczając hxy stosujemy twierdzenie o prawdopodobieństwie całkowitym. Co jest tutaj układem zupełnym zdarzeń?
+=== Obliczając $h_(x y)$ stosujemy twierdzenie o prawdopodobieństwie całkowitym. Co jest tutaj układem zupełnym zdarzeń?
 Wystąpienie/nie wystąpienie błędu implementacji/interpretacji
+
+=== Opisz układy zupełne zdarzeń wykorzystywane w rozumowaniu prowadzącym do określenia dynamiki procesu $W(t)$.
+Na odcinku czasu wystąpi lub nie wystąpi interakcja. Jeśli wystąpi interakcja, to układ zupełny z 4 hipotezami $->$ losowy uczestnik i losowy partner mogą mieć niską lub wysoką reputację
 
 == Szybkie sortowanie
 
@@ -399,10 +459,10 @@ Byłby analogiczny do rozkładu równomiernego, bo ma skończoną wartość śre
 === Co możemy powiedzieć o wartości średniej rozkładu Cauchy'ego?
 Nie istnieje, ponieważ nie działa prawo wielkich liczb. Wielokrotnie powtórzone doświadczenie daje statystycznie tak samo dobry wynik jak pojedyncza iteracja.
 
-=== Co jest powodem narastania trendu przebiegu $(S n)/n$ w funkcji $n$ dla wielkości losowej $X$ o rozkładzie Pareto?
+=== Co jest powodem narastania trendu przebiegu $(S_n)/n$ w funkcji $n$ dla wielkości losowej $X$ o rozkładzie Pareto?
 Jest to spowodowane faktem, że rozkład Pareto z takim współczynnikiem kształtu ma wartość średnią nieskończoną, zatem dąży do nieskończoności.
 
-=== Który parametr rozkładu Pareto należałoby zmienić, aby uzyskać przebieg $(S n)/n$ w funkcji $n$ podobny jak dla wielkości losowej $X$ o rozkładzie równomiernym?
+=== Który parametr rozkładu Pareto należałoby zmienić, aby uzyskać przebieg $(S_n)/n$ w funkcji $n$ podobny jak dla wielkości losowej $X$ o rozkładzie równomiernym?
 Należałoby zmienić współczynnik kształtu tak, żeby otrzymać wartość średnią skończoną. Należy go ustalić $k > 1$.
 
 === Czy w wariancie Chinczyna słabe prawo wielkich liczb działa dla każdego typu rozkładu prawdopodobieństwa obserwacji?
@@ -428,7 +488,7 @@ P(a <= S_n < b) = Phi((b - n * m)/(sqrt(n) * sigma)) - Phi((a - n * m)/(sqrt(n)*
 
 == Eksperyment Wolfa
 
-=== Jakie odchylenie standardowe miałby rozkład wielkości losowej $(S n)/n$ przy założeniu, że eksperyment obejmował nie 20000, lecz 200 rzutów kostką?
+=== Jakie odchylenie standardowe miałby rozkład wielkości losowej $(S_n)/n$ przy założeniu, że eksperyment obejmował nie 20000, lecz 200 rzutów kostką?
 $ s = 0.373/sqrt(200) $
 
 === Co gdyby rozkład obejmował 200 rzutów?
@@ -467,7 +527,15 @@ Odczytujemy argument funkcji Laplace'a dla $0.49$ i oznaczamy go przez $k$. Wted
 $ P("szum" > 50) = P("szum" > 20 sigma_"szum") <= 1/(20^2) = 0.0025 $
 
 === Gdyby odchylenie sygnału wejściowego było o 50% większe $P(abs("out" - E) > 50)$ byłoby ograniczone nie przez $2.4%$, tylko przez
-5.4%
+$
+P(abs(X - E X) >= c sigma) <= 1/c^2 \
+"Wartość dla" P(abs("sygnał" - E) > 50) <= 2.4% \
+50 = c * 7.76 => c = 6.44 \
+P(abs("sygnał" - E) > 50) <= 1/6.44^2 = 2.4% \
+"W zadaniu" sigma "ma się równać" 1.5 * 7.76 "czyli" 11.64 \
+50 = sigma * c ", a więc" c = 50/11.64 = 4,296 \
+P(abs("sygnał" - E) > 50) <= 1/4.296^2 = 5.4%
+$
 
 = Łańcuchy Markowa
 
@@ -481,13 +549,17 @@ Macierz przejść jednorodnego łańcucha Markowa I rzędu ma następujące wła
 == Sztuczne źródła tekstowe
 
 === Jak wielką przestrzeń stanów musielibyśmy rozważać, gdyby generacji tekstu na podstawie częstości $n$-gramów dokonywać przy pomocy łańcuchów Markowa 1 rzędu?
-$ abs(S)^(n-1) $
+$ abs(S)^(n-1)", S to liczba możliwych znaków" $
 
 === Jaki byłby rozmiar macierzy przejść w sztucznym generatorze tekstu opartym na łańcuchach Markowa I rzędu operującym częstościami $n$-gramów?
 $ abs(S)^(n-1) times abs(S)^(n-1) $
 
 === Wyjaśnij, dlaczego do analizy w zasadzie wystarczają nam łańcuchy Markowa I rzędu.
 Bo każdy łańcuch wyższego rzędu można zredukować do łańcucha 1. rzędu kosztem wykładniczego wzrostu ilości stanów.
+
+=== Liczba stanów łańcuchów Markowa I rzędu do analizy quadrogramów na tekstach angielskich wynosi
+$26^3$ lub $27^3$ (uwzględniając spacje, na slajdach uwzględniona) \
+$abs(S)^2$ dla trigramów w I rzędzie (pamiętamy 2 ostatnie)
 
 == Ergodyczność łańcucha Markowa
 
@@ -544,6 +616,9 @@ Operacja ta polega na obrocie układu współrzędnych za pomocą macierzy $Q$, 
 === Które charakterystyki macierzy kowariancji ciągu pikseli są istotne z punktu widzenia optymalizacji stratnej kompresji obrazu?
 Istotne są odpowiednie wektory własne macierzy.
 
+=== Jak należy dobrać kolumny macierzy przekształcenia $Q$, aby zdekorelować piksele i zminimalizować stratność kompresji?
+Błąd ten zminimalizujemy, gdy kolumnami macierzy $Q$ uczynimy wektory własne macierzy.
+
 = Estymatory
 
 == Próbka losowa populacji
@@ -555,6 +630,17 @@ Prosta - $X_i$ są niezależne. Reprezentatywna - $X_i ~ X$ (rozkład cech osobn
 
 === Jaki jest wpływ błędów statystycznych poszczególnych obserwacji na ocenę wartości średniej w populacji o modelu $N(a, sigma)$?
 Czym większy błąd statystyczny danej próbki, z tym mniejszą wagą uwzględniamy ją przy estymacji wartości średniej. Ma to sens, gdyż obserwacje są dla nas mniej wiarygodne, skoro obarczone są większym błędem.
+
+== Monte Carlo: redukcja wariancji
+
+=== Która z dwóch wielkości: $V X + V Y$ oraz $V(X + Y)$ jest większa?
+To zależy od ich korelacji. \
+Jeżeli jest ujemna to $V(X + Y) < V X + V Y$ \
+Jeżeli dodatnia to $V(X + Y) > V X + V Y$ \
+Jeżeli zerowa to $V(X + Y) = V X + V Y$ czyli wtedy, kiedy $X$ i $Y$ są niezależne.
+
+=== Jaki efekt przyniosłaby metoda zmiennych parami przeciwstawnych, gdyby dla $k=1,3,5...$ przyjąć $U_((k+1)) = U_((k))?$
+Zmniejszenia odchylenia standardowego.
 
 == Prognoza ataków dnia zerowego
 
