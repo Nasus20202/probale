@@ -259,7 +259,17 @@ cases(
   psi_(j, k) = p * psi_(j + 1, k) + q * psi_(j, k - 1),
   psi_(j, 0) = 1,
   psi_(100, k) = 0
-)
+) 
+#h(2cm)
+cases(
+  Pi_(j, k) = p * Pi_(j + 1, k) + q * Pi_(j, k - 1),
+  Pi_(100, k) = 1,
+  Pi_(j, 0) = 0
+) 
+\
+psi " - prawdopodobieństwo opróżnienia RK" 
+#h(2cm) 
+Pi " - prawdopodobieństwo przepełnienia RP"
 $
 
 === Co jest większe: $product_(j, k)$ czy $product_(j + 1, k - 1)$?
@@ -269,7 +279,7 @@ $#h(2cm) product_(j, k) < product_(j + 1, k - 1) #h(2cm) product_(j, k) > produc
 
 
 === Czym od przedstawionego różniłoby się rozumowanie prowadzące do prawdopodobieństwa opróżnienia RK?
-To wyżej z  $psi$.
+Metoda ta różniłaby się warunkami granicznymi (zamiast $psi_(j, 0) = 1$ i $psi_(100, k) = 0$ mamy $Pi_(100, k) = 1$ i $Pi_(j, 0) = 0$).
 
 === W omawianym dwuwymiarowym błądzeniu przypadkowym występują dwa ekrany. Jakiego rodzaju?
 Pierwszy ekran - przepełnienie RP $101k+100$, drugi ekran opróżnienie RK $101*100+j$.
@@ -371,6 +381,7 @@ $
 
 
 == Generacja liczb pseudolosowych
+#context counter(heading).update((counter(heading).get().at(0), counter(heading).get().at(1) - 1))
 == Metoda odwracania dystrybuanty
 
 === Jakie przekształcenie generuje liczby losowe o rozkładzie $f(x)$?
@@ -401,7 +412,9 @@ Naturalna zmienna losowa nie może zależeć od skali (jednostki), czyli prawdop
 
 = Sumy niezależnych wielkości losowych
 
-== Funkcje charakterystyczne i tworzące / Rozkłady sum
+== Funkcje charakterystyczne i tworzące
+#context counter(heading).update((counter(heading).get().at(0), counter(heading).get().at(1) - 1))
+== Rozkłady sum
 
 === Jakiej operacji na niezależnych wielkościach losowych odpowiada mnożenie ich funkcji charakterystycznych?
 Dodawaniu tych wielkości.
@@ -520,9 +533,12 @@ Zaobserwujemy kolejne rozkłady Erlanga-n, które będą coraz bardziej przypomi
 == Serwer webowy
 
 === Aby obliczyć $P(99000 <= S_40000 <= 101000)$ potrzebna nam jest wartość funkcji Laplace'a dla...
-$ Phi((101000 - 40000 * 2.5)/(sqrt(40000) * 1.369)) - Phi((99000 - 40000 * 2.5)/(sqrt(40000)*1.369)) = 2 Phi(3.652) $
-$ sigma = sqrt(10*0.25*(1-0.25)) \ 
-P(a <= S_n < b) = Phi((b - n * m)/(sqrt(n) * sigma)) - Phi((a - n * m)/(sqrt(n)*sigma)) $
+$ Phi((101000 - 40000 * 2.5)/(sqrt(40000) * 1.369)) - Phi((99000 - 40000 * 2.5)/(sqrt(40000)*1.369)) = 2 Phi(3.652) = Phi(7.3) \
+Phi((101000 - 99000)/(sqrt(40000) * 1.369)) = Phi((101000 - 99000)/(273.8)) "- szybkie liczenie" \
+sigma = sqrt(10*0.25*(1-0.25)) \ 
+P(a <= S_n < b) = Phi((b - n * m)/(sqrt(n) * sigma)) - Phi((a - n * m)/(sqrt(n)*sigma)) 
+$
+Wynik na slajdzie: $x = 3.652$
 
 == Eksperyment Wolfa
 
