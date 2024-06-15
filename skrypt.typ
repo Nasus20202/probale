@@ -262,8 +262,10 @@ cases(
 )
 $
 
-=== Co jest większe: $product_(j, k)$ czy $product_(j - 1, k - 1)$?
-Większe jest $product_(j - 1, k - 1)$, ponieważ jest większe prawdopodobieństwo kroku w stronę zwiększenia $j$ a bufor konsumenta jest dalej od opróżnienia.
+=== Co jest większe: $product_(j, k)$ czy $product_(j + 1, k - 1)$?
+Większe jest $product_(j + 1, k - 1)$, ponieważ jest większe prawdopodobieństwo kroku w stronę zwiększenia $j$ a bufor konsumenta jest bliżej od opróżnienia. \
+Większe $j$ - bliżej przepełnienia buforu producenta, mniejsze $k$ - bliżej opróżnienia buforu konsumenta. Prawdopodobieństwo rośnie.
+
 
 === Czym od przedstawionego różniłoby się rozumowanie prowadzące do prawdopodobieństwa opróżnienia RK?
 To wyżej z  $psi$.
@@ -490,6 +492,9 @@ Byłby analogiczny do rozkładu równomiernego, bo ma skończoną wartość śre
 === Co możemy powiedzieć o wartości średniej rozkładu Cauchy'ego?
 Nie istnieje, ponieważ nie działa prawo wielkich liczb. Wielokrotnie powtórzone doświadczenie daje statystycznie tak samo dobry wynik jak pojedyncza iteracja.
 
+=== Dlaczego przebieg $S_n/n$ w funkcji $n$ nie ustala się dla wielkości losowej X o rozkładzie Cauchy'ego?
+Rozkład Cauchy'ego oscyluje wokół 0.5 i się nie zbiega. W przypadku tego rozkładu wartość średnia nie istnieje więc nie działa prawo wielkich liczb, dowolna ilość obserwacji gwarantuje statystycznie tak samo dobry wynik jak jedna obserwacja.
+
 === Co jest powodem narastania trendu przebiegu $(S_n)/n$ w funkcji $n$ dla wielkości losowej $X$ o rozkładzie Pareto?
 Jest to spowodowane faktem, że rozkład Pareto z takim współczynnikiem kształtu ma wartość średnią nieskończoną, zatem dąży do nieskończoności.
 
@@ -611,6 +616,9 @@ cases(
 ) #h(2cm)
 pi_1 = 3/4, pi_2 = 1/4 => pi = (3/4, 1/4)
 $
+
+=== Który parametr macierzy prawdopodobieństw przejść decyduje o szybkości zbieżności rozkładu prawdopodobieństwa stanów jednorodnego łańcucha Markowa I rzędu do rozkładu granicznego $p(infinity)$?
+Szybkość zbieżności łańcucha Markowa odpowiada drugiej wartości własnej M czyli $lambda_1$. Czym $lambda_1$ mniejsze, tym szybciej się zbiega.
 
 == PageRank
 
@@ -738,6 +746,9 @@ Prawostronny, jeśli duże wartości $accent(A, hat)$ przemawiają przeciwko $H_
 
 === Dlaczego w teście serii przyjęliśmy dwustronny obszar odrzucenia?
 Bo i male i duże ilości serii przemawiają przeciwko temu, że próba jest prosta.
+
+=== Opisz idealny i najdalszy od idealnego przebieg krzywej ROC. Uzasadnij
+Idealna krzywa ROC zaczyna się w punkcie (0,0), przechodzi pionowo do punktu (0,1), a następnie poziomo do punktu (1,1), co oznacza doskonałą klasyfikację z AUC równym 1. Najgorsza krzywa ROC to linia prosta od (0,0) do (1,1), wskazująca na losowe przypisywanie klas z AUC równym 0.5, czyli brak zdolności do nauki i rozróżniania klas.
 
 == Test istotności
 
