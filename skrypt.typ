@@ -324,7 +324,7 @@ Wybieramy tą decyzję, która ma mniejszy koszt. Kontynuacja to koszt wykonania
 === W którym momencie zastosowaliśmy uogólnione pojęcie wartości średniej?
 Liczenie kosztu kontynuacji: $E h (B_(n- y, p) / h)$
 
-== Generałowie bizantyjscy
+== Bizantyjscy generałowie
 
 === Jakiej informacji nie wykorzystuje zasada maksimum wiarygodności w porównaniu do twierdzenia Bayesa?
 Nie korzysta ona z informacji o prawdopodobieństwie zostania bizantyjskim generałem przez agenta. Nie zakłada, że dzieje się to w sposób niezależny.
