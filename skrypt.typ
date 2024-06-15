@@ -741,7 +741,9 @@ Nie, prawdziwy wynosi $[0,1801,0,2216]$. Ponieważ wraz ze spadkiem poziomu ufno
 #align(center)[
   #table(
     columns: 4,
-    [n], [z], [$delta$], [$J_delta (z)$],
+    table.header(
+      [*n*], [*z*], [*$delta$*], [*$J_delta (z)$*]
+    ),
     [1000],  [0.2],  [0.95], [[0.1764, 0.2260]],
     [1000],  [0.2],  [0.90], [[0.1801, 0.2216]],
     [10000], [0.2],  [0.95], [[0.1923, 0.2080]],
