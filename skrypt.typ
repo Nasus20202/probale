@@ -103,7 +103,7 @@
         #link(e.location())[
           #stack(
             dir: ltr,
-            e.body,
+            text(weight: "extrabold", to-string(e.body).at(0)) + to-string(e.body).slice(1),
             h(5pt),
             "(" + str(e.location().page()) + ")"
           )
@@ -265,6 +265,7 @@ $
 === Co jest większe: $product_(j, k)$ czy $product_(j + 1, k - 1)$?
 Większe jest $product_(j + 1, k - 1)$, ponieważ jest większe prawdopodobieństwo kroku w stronę zwiększenia $j$ a bufor konsumenta jest bliżej od opróżnienia. \
 Większe $j$ - bliżej przepełnienia buforu producenta, mniejsze $k$ - bliżej opróżnienia buforu konsumenta. Prawdopodobieństwo rośnie.
+$#h(2cm) product_(j, k) < product_(j + 1, k - 1) #h(2cm) product_(j, k) > product_(j - 1, k + 1)$
 
 
 === Czym od przedstawionego różniłoby się rozumowanie prowadzące do prawdopodobieństwa opróżnienia RK?
@@ -369,6 +370,7 @@ B(alpha, beta) "jest funkcją beta, która normalizuje rozkład (całka gęstoś
 $
 
 
+== Generacja liczb pseudolosowych
 == Metoda odwracania dystrybuanty
 
 === Jakie przekształcenie generuje liczby losowe o rozkładzie $f(x)$?
