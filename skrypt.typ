@@ -64,8 +64,8 @@
       gutter: 5pt,
       for e in query(selector(heading)).filter(x => x.level != 3) [
         #link(e.location())[
-          #stack(
-            dir: ltr,
+          #grid(
+            columns: (auto, auto, auto, auto),
             h(e.depth * 10pt),
             e,
             h(5pt),
@@ -101,8 +101,8 @@
       gutter: 5pt,
       for e in query(selector(heading)).sorted(key: x => upper(to-string(x))).filter(x => x.level == 2) [
         #link(e.location())[
-          #stack(
-            dir: ltr,
+          #grid(
+            columns: (auto, auto, auto),
             text(weight: "extrabold", to-string(e.body).at(0)) + to-string(e.body).slice(1),
             h(5pt),
             "(" + str(e.location().page()) + ")"
