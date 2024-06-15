@@ -335,6 +335,9 @@ Wówczas wyniki byłyby do siebie proporcjonalne, nie obserwowalibyśmy różnic
 === Jak mierzyć niepewność uzyskanych wyników? Dlaczego w przypadku zasady maksimum wiarygodności jest ona większa w porównaniu z twierdzeniem Bayesa?
 Niepewność uzyskanych wyników możemy mierzyć przez rozproszenie słupków histogramu od maksimum. Dla zasady maksimum wiarygodności nie wykorzystujemy znajomości o prawdopodobieństwie zostania przez agenta bizantyjskim generałem, dlatego nie jest faworyzowana mniejsza ich ilość dla mniejszej liczby niepoprawnych odpowiedzi, co mogłoby stanowić czynnik przyczyniający się do zredukowania niepewności.
 
+=== Zastosowanie zasady maksimum wiarygodności zamiast twierdzenia Bayesa może być motywowane tym, że...
+Dla zasady maksimum wiarygodności nie wykorzystujemy znajomości o prawdopodobieństwie zostania przez agenta bizantyjskim generałem, dlatego nie jest faworyzowana mniejsza ich ilość dla mniejszej liczby niepoprawnych odpowiedzi, co mogłoby stanowić czynnik przyczyniający się do zredukowania niepewności.
+
 == System reputacyjny Beta
 
 === Jak na jakość eliminacji nieuczciwych klientów wpłynęłoby zastąpienie parametrów kwantyl $0.95$ i kwantyl $0.05$ przez kwantyl $0.9$ i kwantyl $0.1$?
@@ -538,6 +541,12 @@ Jest to wykres kwantyl funkcji dopasowywanej do kwantyla empirycznego. Dzięki t
 
 === Jaki byłby kształt rozkładu $Z$, gdyby przyjąć $g(x) = a x + b "(a, b - stałe)"$?
 Taki sam jak kształt S, bo pochodna stała.
+
+=== Przyjmując $g(s) = s^2$ otrzymaliśmy następujący rozkład $Z$:
+$ p_Z(z) = F'_Z(z) = F'_S(s)/abs(g'(s)) bar.v_(s=g^(-1)(z)) \
+"Dla" g(s) = s^2 "oraz" p_S(s) = 1/(sqrt(2 pi) dot sigma) e^(-(s-m)^2 \/ 2 sigma^2) \
+g^(-1)(s) = sqrt(s) \
+p_Z(z) = 1/(sqrt(2 pi) dot sigma dot 2 sqrt(z)) e^(-(sqrt(z)-m)^2 \/ 2 sigma^2) $
 
 == Atak na Wi-Fi
 
