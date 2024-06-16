@@ -542,8 +542,8 @@ Zaobserwujemy kolejne rozkłady Erlanga-n, które będą coraz bardziej przypomi
 == Serwer webowy
 
 === Aby obliczyć $P(99000 <= S_40000 <= 101000)$ potrzebna nam jest wartość funkcji Laplace'a dla...
-$ Phi((101000 - 40000 * 2.5)/(sqrt(40000) * 1.369)) - Phi((99000 - 40000 * 2.5)/(sqrt(40000)*1.369)) = 2 Phi(3.652) = Phi(7.3) \
-Phi((101000 - 99000)/(sqrt(40000) * 1.369)) = Phi((101000 - 99000)/(273.8)) "- szybkie liczenie" \
+$ Phi((101000 - 40000 * 2.5)/(sqrt(40000) * 1.369)) - Phi((99000 - 40000 * 2.5)/(sqrt(40000)*1.369)) = 2 Phi(3.652) \
+2 Phi((101000 - 99000)/(2 * sqrt(40000) * 1.369)) = 2 Phi((101000 - 99000)/(547.6)) "- szybkie liczenie gdy" (a+b)/2 = 100000  \
 sigma = sqrt(10*0.25*(1-0.25)) \ 
 P(a <= S_n < b) = Phi((b - n * m)/(sqrt(n) * sigma)) - Phi((a - n * m)/(sqrt(n)*sigma)) 
 $
