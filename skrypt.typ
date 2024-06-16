@@ -162,6 +162,8 @@ Ciąg przewag orłów nad reszkami w serii rzutów monetą można analizować ja
 === Na podstawie rysunku zamieszczonego na slajdzie podaj probabilistyczną przyczynę, dla której "statystyczny pasażer" poczeka na przystanku dłużej niż 5 minut.
 Jeśli przychodzą trzy autobusy po sobie, pierwszy, potem drugi z czasem X po pierwszym (mniejszym od średniej) a potem trzeci z czasem Y po drugim (większym od średniej) to częściej statystyczny pasażer będzie trafiał w przedział Y, czyli będzie czekał dłużej od wartości średniej.
 
+#pagebreak()
+
 === W kontekście "prześladowania przez pecha" co dokładnie rozumiemy przez "symetryczną sytuację losową"?
 Prześladowanie przez pecha to złudzenie. Spośród symetrycznych doświadczeń losowych, mocniej zapamiętujemy te, które są na naszą niekorzyść. Przykładowo, jeżeli codziennie na przystanek przyjeżdża autobus, to zapamiętamy tylko te sytuacje, kiedy nie przyjedzie na czas. Czyli symetryczna sytuacja losowa to powtórzone doświadczenie pod tymi samymi warunkami.
 
@@ -345,6 +347,8 @@ Nie korzysta ona z informacji o prawdopodobieństwie zostania bizantyjskim gener
 === Jakie różnice między wynikami dla twierdzenia Bayesa i zasady maksimum wiarygodności zaobserwowaliśmy przyjmując, że liczba agentów typu BG może być dowolna od 0 do 100 z jednakowym prawdopodobieństwem?
 Wówczas wyniki byłyby do siebie proporcjonalne, nie obserwowalibyśmy różnic w kształtach tzn. $P(H_i/R = k) ~ P(R = k|H_i)$ (przeskalowane o współczynnik normalizacji).
 
+#pagebreak()
+
 === Jak mierzyć niepewność uzyskanych wyników? Dlaczego w przypadku zasady maksimum wiarygodności jest ona większa w porównaniu z twierdzeniem Bayesa?
 Niepewność uzyskanych wyników możemy mierzyć przez rozproszenie słupków histogramu od maksimum. Dla zasady maksimum wiarygodności nie wykorzystujemy znajomości o prawdopodobieństwie zostania przez agenta bizantyjskim generałem, dlatego nie jest faworyzowana mniejsza ich ilość dla mniejszej liczby niepoprawnych odpowiedzi, co mogłoby stanowić czynnik przyczyniający się do zredukowania niepewności.
 
@@ -379,6 +383,7 @@ beta > 0 "jest drugim parametrem kształtu," \
 B(alpha, beta) "jest funkcją beta, która normalizuje rozkład (całka gęstości prawdopodobieństwa od 0 do 1 równa 1)."
 $
 
+#pagebreak()
 
 == Generacja liczb pseudolosowych
 #context counter(heading).update((counter(heading).get().at(0), counter(heading).get().at(1) - 1))
@@ -479,6 +484,8 @@ Atom w jednym punkcie, a reszta jest rozłożona jak krzywa wykładnicza.
 === W przykładzie dla $P(N = 0) = 0.3$, $P(N = 1) = 0.2$, $P(N = 2) = 0.2$, $P(N = 3) = 0.1$ prawdopodobieństwo, że populacja w drugim pokoleniu wymrze wynosi...
 $ P(Y^(2) = 0) = 0.4407 $
 
+#pagebreak()
+
 === Jakie jest prawdopodobieństwo ostatecznego wymarcia populacji przy $P(N = 0) = 0.3, P(N = 1) = 0.4, P(N = 2) = 0.2, P(N = 3) = 0.05$.
 Korzystamy z metody Newtona (iteracyjnym przybliżaniu pierwiastka równania) \
 $q = 0.3 + 0.4q +0.2q^2 + 0.05q^3$ (przyrównujemy to do 0, czyli przenosimy q na drugą) \
@@ -518,6 +525,8 @@ Należałoby zmienić współczynnik kształtu tak, żeby otrzymać wartość ś
 
 === Czy w wariancie Chinczyna słabe prawo wielkich liczb działa dla każdego typu rozkładu prawdopodobieństwa obserwacji?
 Nie, nie będzie on działał dla rozkładu, który nie ma średniej, czyli np. dla Cauchy'ego.
+
+#pagebreak()
 
 == Centralne twierdzenie graniczne
 
@@ -596,6 +605,8 @@ P(abs("sygnał" - E) > 50) <= 1/6.44^2 = 2.4% \
 50 = sigma * c ", a więc" c = 50/11.64 = 4,296 \
 P(abs("sygnał" - E) > 50) <= 1/4.296^2 = 5.4%
 $
+
+#pagebreak()
 
 = Łańcuchy Markowa
 
@@ -680,6 +691,8 @@ Od tego współczynnika zależy współczynnik kierunkowy prostej. Przykładowo,
 === Jak wygląda prosta regresji w przypadku, gdy $X i Y$ są nieskorelowane?
 W przypadku, gdy zmienne $X$ i $Y$ są nieskorelowane, współczynnik kierunkowy $beta_1$ w prostym modelu regresji liniowej będzie bliski lub równy zeru, co oznacza, Że nie ma liniowego związku między $X$ i $Y$. W takiej sytuacji, najlepszym estymatorem dla $Y$ byłaby po prostu średnia $Y$, ponieważ $X$ nie dostarcza żadnej dodatkowej informacji, która mogłaby pomóc w przewidywaniu $Y$. \
 Zatem równanie prostej regresji przy braku korelacji między $X$ i $Y$ sprowadza się do: $ Y = beta_0 + epsilon$, gdzie $beta_0$ będzie równy średniej $Y$.
+
+#pagebreak()
 
 == Stratna kompresja obrazu
 
