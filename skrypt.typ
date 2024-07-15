@@ -119,7 +119,7 @@
 
 #toc()
 #index()
-#pagebreak()
+
 
 = Pytania o wszystkim i o niczym
 
@@ -162,7 +162,7 @@ Ciąg przewag orłów nad reszkami w serii rzutów monetą można analizować ja
 === Na podstawie rysunku zamieszczonego na slajdzie podaj probabilistyczną przyczynę, dla której "statystyczny pasażer" poczeka na przystanku dłużej niż 5 minut.
 Jeśli przychodzą trzy autobusy po sobie, pierwszy, potem drugi z czasem X po pierwszym (mniejszym od średniej) a potem trzeci z czasem Y po drugim (większym od średniej) to częściej statystyczny pasażer będzie trafiał w przedział Y, czyli będzie czekał dłużej od wartości średniej.
 
-#pagebreak()
+
 
 === W kontekście "prześladowania przez pecha" co dokładnie rozumiemy przez "symetryczną sytuację losową"?
 Prześladowanie przez pecha to złudzenie. Spośród symetrycznych doświadczeń losowych, mocniej zapamiętujemy te, które są na naszą niekorzyść. Przykładowo, jeżeli codziennie na przystanek przyjeżdża autobus, to zapamiętamy tylko te sytuacje, kiedy nie przyjedzie na czas. Czyli symetryczna sytuacja losowa to powtórzone doświadczenie pod tymi samymi warunkami.
@@ -183,6 +183,9 @@ Nie zależy (na wzorze można pokazać). Zależy jedynie od ilości wymiarów, w
 
 === W jaki sposób zastosowana została geometryczna definicja prawdopodobieństwa?
 Prawdopodobieństwo jest równe stosunkowi miary obszaru hiperkuli do miary obszaru hiperkostki.
+
+=== Jaki jest wpływ dopuszczalnej odchyłki sumarycznej $delta$ na efektywność symulatora opartego na generacji punktów hiperkostki?
+Żaden $P(A)$ nie zależy od $delta$.
 
 == Kod korekcyjny w przestrzeni Hamminga
 
@@ -235,6 +238,9 @@ $binom(n, k) (n - k)^m$, bo doliczamy jeszcze, gdy $k + 1$, $k + 2$, ..., $n$ sz
 
 === Uzasadnij, że zdarzenia $A_1$, ..., $A_n$, gdzie $A_i$ - szczelina $i$ jest pusta, nie są rozłączne i nie są niezależne.
 Nie są rozłączne, ponieważ może być kilka pustych szczelin naraz. Nie są niezależne, bo pustość jednej szczeliny zmniejsza prawdopodobieństwo pustości innej.
+
+=== Wzór $P(B_(n, p) = k) = binom(n, k)p^k (1-p)^(n-k)$ dla schematu Bernoulliego jest szczególnym przypadkiem twierdzenia o kombinacji zdarzeń. Na czym polega jego szczególność?
+W schemacie Bernoulliego zdarzenia są 1) niezależne oraz 2) równoprawdopodobne.
 
 == Filtr Blooma
 
@@ -291,6 +297,9 @@ Pierwszy ekran - przepełnienie RP $101k+100$, drugi ekran opróżnienie RK $101
 === Jaki sens ma wartość $l$ (małe L) w wyrażeniu na $P(T <= k)$?
 Jest to liczba wylosowana przez lidera, czyli ciąg orłów i reszek zamieniony na liczbę. Może ona być z przedziału $[0, 2^k - 1]$ i służy nam w twierdzeniu o prawdopodobieństwie całkowitym.
 
+=== Podaj oszacowanie mediany rozkładu wielkości losowej $T$ otrzymanego w pokazanym przykładzie dla $n = 10$.
+$M e T = min { k | P(T <= k) >= 0.5 } = 4$ (uznawane były też odpowiedzi $<5$ i $>3$)
+
 == Sieć społecznościowa
 
 === Obliczając dynamikę $W(t)$ trzy razy korzystaliśmy z twierdzenia o prawdopodobieństwie całkowitym. Z jakich układów hipotez korzystaliśmy?
@@ -316,6 +325,9 @@ Ze względu na to, że masa prawdopodobieństwa przeniesiona została z ogona do
 
 === Jaki sens mają wielkości losowe $X_1$, ..., $X_d$ w problemie zbieracza kuponów?
 Są to czasy czekania natrafienie na kolejny kupon (kolor), którego jeszcze nie mamy.
+
+=== Niech ciąg $(Z_1, Z_2, ...)$ reprezentuje zbiory posiadanych kolorów w kolejnych etapach zbierania kuponów. Uzasadnij, że jest to łańcuch Markowa I rzędu.
+$P(Z_t = z_t | Z_(t-1) = z_(t-1),Z_(t-2) = z_(t-2), ... , Z_1 = z_1)$ jest prawdopodobieństwem że kolejny wylosowany kolor $k in z_(t-1)$ (gdy $z_t = z_(t-1)$), bądź że $k in z_t / z_(t-1)$ (gdy $z_t != z_(t-1)$); zatem do jego wyznaczenia nie jest potrzebna znajomość $z_(t-2), ... , z_1$.
 
 == Optymalizacja polityki terminacji
 
@@ -347,7 +359,7 @@ Nie korzysta ona z informacji o prawdopodobieństwie zostania bizantyjskim gener
 === Jakie różnice między wynikami dla twierdzenia Bayesa i zasady maksimum wiarygodności zaobserwowaliśmy przyjmując, że liczba agentów typu BG może być dowolna od 0 do 100 z jednakowym prawdopodobieństwem?
 Wówczas wyniki byłyby do siebie proporcjonalne, nie obserwowalibyśmy różnic w kształtach tzn. $P(H_i/R = k) ~ P(R = k|H_i)$ (przeskalowane o współczynnik normalizacji).
 
-#pagebreak()
+
 
 === Jak mierzyć niepewność uzyskanych wyników? Dlaczego w przypadku zasady maksimum wiarygodności jest ona większa w porównaniu z twierdzeniem Bayesa?
 Niepewność uzyskanych wyników możemy mierzyć przez rozproszenie słupków histogramu od maksimum. Dla zasady maksimum wiarygodności nie wykorzystujemy znajomości o prawdopodobieństwie zostania przez agenta bizantyjskim generałem, dlatego nie jest faworyzowana mniejsza ich ilość dla mniejszej liczby niepoprawnych odpowiedzi, co mogłoby stanowić czynnik przyczyniający się do zredukowania niepewności.
@@ -383,7 +395,8 @@ beta > 0 "jest drugim parametrem kształtu," \
 B(alpha, beta) "jest funkcją beta, która normalizuje rozkład (całka gęstości prawdopodobieństwa od 0 do 1 równa 1)."
 $
 
-#pagebreak()
+=== W 10 próbach Bernoulliego zaobserwowano 7 sukcesów i 3 porażki. Jaki jest rozkład à posteriori prawdopodobieństwa sukcesu $p$, jeżeli rozkład à priori jest równomierny dla $p in [0,1]$?
+$"Beta"_(7,3) (p)$
 
 == Generacja liczb pseudolosowych
 #context counter(heading).update((counter(heading).get().at(0), counter(heading).get().at(1) - 1))
@@ -440,6 +453,10 @@ $ g(X) = cases(
 ) $
 Jest, charakterystyczna to całkowanie, tworząca to dodawanie. Różnica jest w dziedzinie.
 
+=== Niezależne wielkości losowe $X$ i $Y$ mają dane funkcje charakterystyczne $phi_X (v)$ i $phi_Y (v)$. Zapisz $phi_Z(v)$, gdzie $Z = a X + b Y + c$, zaś a, b, c - stałe.
+
+$ phi_Z(v) = E e^(j v (a X + b Y + c)) = E e^(j v a X) E e^(j v b Y) E e^(j v c) = phi_X (a v) phi_Y (b v) e^(j v c) $
+
 == Równoważenie obciążenia: round robin
 
 === Jaki rozkład ma interwał między dwoma kolejnymi wywołaniami do danego serwera w obecności 5 równoległych serwerów?
@@ -479,12 +496,13 @@ Jest to rozkład wykładniczy.
 === Jaki rozkład prawdopodobieństwa odpowiada funkcji charakterystycznej będącej pojedynczą eksponentą?
 Atom w jednym punkcie, a reszta jest rozłożona jak krzywa wykładnicza.
 
+=== Jaki rozkład ma liczba zdarzeń na odcinku czasu ustalonej długości $t$, jeżeli interwały między nimi są iid i mają rozkład wykładniczy o średniej $a$?
+Rozkład Poissona ze średnią $t/a$.
+
 == Opróżnianie stosu
 
 === W przykładzie dla $P(N = 0) = 0.3$, $P(N = 1) = 0.2$, $P(N = 2) = 0.2$, $P(N = 3) = 0.1$ prawdopodobieństwo, że populacja w drugim pokoleniu wymrze wynosi...
 $ P(Y^(2) = 0) = 0.4407 $
-
-#pagebreak()
 
 === Jakie jest prawdopodobieństwo ostatecznego wymarcia populacji przy $P(N = 0) = 0.3, P(N = 1) = 0.4, P(N = 2) = 0.2, P(N = 3) = 0.05$.
 Korzystamy z metody Newtona (iteracyjnym przybliżaniu pierwiastka równania) \
@@ -506,6 +524,10 @@ Jest ono równe mniejszemu z tych dwóch prawdopodobieństw, czyli $product = mi
 Jest to wartość średnia liczby bezpośrednich potomków $G'_n (1) = E N$. Jeśli $E N <= 1$ to populacja na pewno wymrze. W przeciwnym wypadku, istnieje niezerowe prawdopodobieństwo, że stos się już nigdy nie opróżni. \
 Dla tych parametrów wymrze: 0.791, przetrwa: 0.209
 
+=== Opisz wszystkie elementy równania $product = G_N (product)$ i uzasadnij, że $product = 1$ zawsze jest jednym z jego pierwiastków.
+
+$product$ - prawdopodobieństwo ostatecznego wymarcia populacji, $N$ - liczba potomków osobnika, $G_N$ - funkcja tworząca wielkości losowej $N$; $G_N(1) = sum_(k=0)^infinity P(N = k) = 1$ (warunek normalizacyjny)
+
 == Słabe prawo wielkich liczb: eksperyment
 
 === Gdyby rozkład $X$ był wykładniczy, to do którego z pokazanych przebiegów podobny byłby analogicznie otrzymany przebieg w funkcji $n$?
@@ -526,7 +548,8 @@ Należałoby zmienić współczynnik kształtu tak, żeby otrzymać wartość ś
 === Czy w wariancie Chinczyna słabe prawo wielkich liczb działa dla każdego typu rozkładu prawdopodobieństwa obserwacji?
 Nie, nie będzie on działał dla rozkładu, który nie ma średniej, czyli np. dla Cauchy'ego.
 
-#pagebreak()
+=== Wyjaśnij przyczynę braku zbieżności w otrzymanych wykresach $S_n/n$ dla rozkładów Pareto i Cauchy'ego.
+Dla rozkładu Pareto z parametrem kształtu $<= 1$ mamy $E X = infinity$; dla rozkładu Cauchy'ego prawo wielkich liczb nie działa (nie istnieje $E X$).
 
 == Centralne twierdzenie graniczne
 
@@ -557,6 +580,9 @@ $ s = 0.373/sqrt(200) $
 === Co gdyby rozkład obejmował 200 rzutów?
 Hipoteza, że kostka jest uczciwa byłaby bardziej wiarygodna, bo mielibyśmy większe odchylenie standardowe.
 
+=== Dlaczego do zakwestionowania uczciwości kostki Richarda Wolfa potrzebne było centralne twierdzenie graniczne, a nie wystarczyło słabe prawo wielkich liczb?
+Potrzebne były oceny masy prawdopodobieństwa wielkości losowej $S_n/n$ wokół $E S_n/n$ dla dużych $n < infinity$.
+
 == Czas trwania sesji
 
 === Gęstość prawdopodobieństwa przekształconej wielkości losowej otrzymujemy zakładając, że przekształcenie $g$ spełnia warunki...
@@ -580,6 +606,9 @@ $ p_Z(z) = F'_Z(z) = F'_S(s)/abs(g'(s)) bar.v_(s=g^(-1)(z)) \
 g^(-1)(s) = sqrt(s) \
 p_Z(z) = 1/(sqrt(2 pi) dot sigma dot 2 sqrt(z)) e^(-(sqrt(z)-m)^2 \/ 2 sigma^2) $
 
+=== Jeżeli $S$ ma rozkład $N(m, sigma)$, to jaki rozkład ma wielkość losowa $Z = 2S$?
+$N(2m, 2sigma)$ (przekształcenie $Z = g(S)$ jest liniowe, zatem kształt rozkładu zostaje zachowany, zaś wartość oczekiwana i odchylenie standardowe zostają odpowiednio przeskalowane)
+
 == Atak na Wi-Fi
 
 === Jakie zagadnienie rozstrzyga nierówność Popoviciu?
@@ -587,6 +616,9 @@ Pozwala nam określić maksymalną wariancję dla wszystkich rozkładów ${X_1},
 
 === Czym należy zastąpić warunek $n >= 663.6 sigma^2$, jeżeli wymagany procent pewności zmniejszymy do 98%?
 Odczytujemy argument funkcji Laplace'a dla $0.49$ i oznaczamy go przez $k$. Wtedy $n >= k^2 sigma^2 / 0.01$.
+
+=== Gdyby dopuszczalne ryzyko że $|S_n/n - m| > 0.1$ zwiększyć do 2%, to minimalna bezpieczna liczba obserwacji $n$ wzrośnie czy zmaleje? Uzasadnij.
+Skoro wymagana wartość $Phi(0.1 sqrt(n)/sigma)$ zmniejszyła się, to $n$ także ($Phi$ jest funkcją rosnącą)
 
 = Ogony rozkładów prawdopodobieństwa
 
@@ -606,7 +638,7 @@ P(abs("sygnał" - E) > 50) <= 1/6.44^2 = 2.4% \
 P(abs("sygnał" - E) > 50) <= 1/4.296^2 = 5.4%
 $
 
-#pagebreak()
+
 
 = Łańcuchy Markowa
 
@@ -649,6 +681,9 @@ $
 === Który parametr macierzy prawdopodobieństw przejść decyduje o szybkości zbieżności rozkładu prawdopodobieństwa stanów jednorodnego łańcucha Markowa I rzędu do rozkładu granicznego $p(infinity)$?
 Szybkość zbieżności łańcucha Markowa odpowiada drugiej wartości własnej M czyli $lambda_1$. Czym $lambda_1$ mniejsze, tym szybciej się zbiega.
 
+=== Jaki jest rozkład graniczny jednorodnego dwustanowego łańcucha Markowa I rzędu o macierzy przejść $M = mat(1/3, 2/3; 1/2, 1/2)$?
+Z układu równań Chapmana-Kołmogorowa $p*M = p$ z warunkiem $abs(p) = 1$ dostajemy $p_1 = 3/7, p_2 = 4/7$.
+
 == PageRank
 
 === Jak z punktu widzenia markowskiego modelu probabilistycznego należy interpretować współczynnik tłumienia w podstawowej formule PageRank?
@@ -666,6 +701,11 @@ o wolniejszym spadku wraz ze wzrostem $k$, ponieważ prawdopodobieństwo $3$-pac
 Mamy dwa stany, jeżeli znajdujemy się w danym kroku w stanie $1$ to $P$ wypisania jedynki jest równe $b_1$, a zera $1-b_1$, natomiast w stanie $2$ wypisanie jedynki jest równe $b_2$, a zera $1-b_2$ (czyli generujemy z pewnym prawdopodobieństwem zależnym od stanu).
 
 = Wektory losowe i korelacja
+
+== Wektory losowe
+
+=== W jakiej sytuacji rozkład łączny wektora losowego jest jednoznacznie wyznaczony przez jego rozkłady brzegowe?
+Gdy składowe są statystycznie niezależne, wówczas w każdym punkcie swojej dziedziny wartość rozkładu łącznego jest iloczynem wartości rozkładów brzegowych.
 
 == Korelacja: wariancja X+Y
 
@@ -692,7 +732,8 @@ Od tego współczynnika zależy współczynnik kierunkowy prostej. Przykładowo,
 W przypadku, gdy zmienne $X$ i $Y$ są nieskorelowane, współczynnik kierunkowy $beta_1$ w prostym modelu regresji liniowej będzie bliski lub równy zeru, co oznacza, Że nie ma liniowego związku między $X$ i $Y$. W takiej sytuacji, najlepszym estymatorem dla $Y$ byłaby po prostu średnia $Y$, ponieważ $X$ nie dostarcza żadnej dodatkowej informacji, która mogłaby pomóc w przewidywaniu $Y$. \
 Zatem równanie prostej regresji przy braku korelacji między $X$ i $Y$ sprowadza się do: $ Y = beta_0 + epsilon$, gdzie $beta_0$ będzie równy średniej $Y$.
 
-#pagebreak()
+=== W jakich granicach może zmieniać się współczynnik kowariancji $gamma_(X Y)$ dowolnych wielkości losowych $X$ i $Y$ o znanych skończonych wariancjach $V X$ i $V Y$?
+Z nierówności Schwarza mamy $|gamma_(X Y)| <= sqrt(V X)sqrt(V Y)$, zatem $-sqrt(V X) sqrt(V Y) <= gamma_(X Y) <= sqrt(V X) sqrt(V Y)$.
 
 == Stratna kompresja obrazu
 
@@ -707,6 +748,9 @@ Istotne są odpowiednie wektory własne macierzy.
 
 === Jak należy dobrać kolumny macierzy przekształcenia $Q$, aby zdekorelować piksele i zminimalizować stratność kompresji?
 Błąd ten zminimalizujemy, gdy kolumnami macierzy $Q$ uczynimy wektory własne macierzy.
+
+=== Jaka własność macierzy obrotu $Q$ powoduje dekorelację pikseli obrazu ?
+Kolumny $Q$ są wektorami własnymi macierzy kowariancji wektora pikseli.
 
 = Estymatory
 
@@ -783,6 +827,9 @@ Bo i male i duże ilości serii przemawiają przeciwko temu, że próba jest pro
 === Opisz idealny i najdalszy od idealnego przebieg krzywej ROC. Uzasadnij
 Idealna krzywa ROC zaczyna się w punkcie (0,0), przechodzi pionowo do punktu (0,1), a następnie poziomo do punktu (1,1), co oznacza doskonałą klasyfikację z AUC równym 1. Najgorsza krzywa ROC to linia prosta od (0,0) do (1,1), wskazująca na losowe przypisywanie klas z AUC równym 0.5, czyli brak zdolności do nauki i rozróżniania klas.
 
+=== Jakiemu wzajemnemu położeniu rozkładów $p_(accent(A, hat)|H_0)(z)$ i $p_(accent(A, hat)|H_1)(z)$ odpowiada najgorszy możliwy test istotności, w którym moc testu = $alpha$?
+Oba rozkłady pokrywają się (moc testu jest masą rozkładu z warunkiem $H_1$ powyżej kwantyla $K_(1-alpha)$ rozkładu z warunkiem $H_0$; zatem gdy rozkłady pokrywają się, jest równa $alpha$).
+
 == Test istotności
 
 === Gdy wyznaczona wartość $p$-value jest wyższa niż przyjęty poziom istotności, to czy powinniśmy odrzucić hipotezę zerową?
@@ -793,3 +840,6 @@ Tak, powinniśmy odrzucić hipotezę zerową, ponieważ dla mniejszych poziomów
 
 === Gdy wyznaczona wartość $p$-value jest wyraźnie niższa niż przyjęty poziom istotności, czujemy się bardziej, czy mniej komfortowo odrzucając hipotezę zerową?
 Gdy jest niższa to odrzucając czujemy się bezpieczniej.
+
+=== W teście na poziomie istotności $alpha = 5%$ pobranie próby prostej dało $p$-value = 95% i czuję się z tym komfortowo. Czy odrzuciłem $H_0$ - uzasadnij?
+$p$-value > $alpha$ powoduje nieodrzucenie $H_0$; im większe jest $p$-value, tym bardziej czuję się z tym komfortowo.
